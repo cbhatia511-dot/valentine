@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Happy Birthday My Princess 💖</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Comic Sans MS', cursive;
+    text-align: center;
+    background: linear-gradient(135deg, #ffd6e7, #ffe9f3, #fff5fa);
+    overflow-x: hidden;
+}
+.gallery{
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.gallery:hover{
+    transform: scale(1.1);
+    box-shadow: 0 0 15px hotpink;
+}
+/* SLIDESHOW */
+.slideshow{
+    position: relative;
+    width: 250px;
+    height: 250px;
+    margin: auto;
+}
+
+.slide{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    box-shadow: 0 0 25px hotpink;
+}
+
+.slide.active{
+    opacity: 1;
+}
+
+/* Countdown Screen */
+#countdownScreen{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #ff9acb, #ffcce6);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    color: white;
+    font-size: 35px;
+    text-align: center;
+}
+
+#timer{
+    font-size: 45px;
+    margin-top: 20px;
+}
+
+/* Floating Hearts */
+.heart {
+    position: fixed;
+    color: red;
+    animation: float 6s linear infinite;
+    font-size: 20px;
+}
+
+@keyframes float {
+    0% { transform: translateY(100vh); opacity: 1; }
+    100% { transform: translateY(-10vh); opacity: 0; }
+}
+
+/* Heading */
+h1 {
+    font-size: 50px;
+    color: #ff1493;
+    margin-top: 80px;
+    text-shadow: 0 0 20px #ff69b4;
+}
+
+/* Boxes */
+.box {
+    display: none;
+    margin: 20px auto;
+    padding: 25px;
+    width: 85%;
+    max-width: 550px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 0 20px pink;
+    position: relative;
+}
+
+button {
+    padding: 12px 25px;
+    margin: 15px;
+    font-size: 18px;
+    border: none;
+    border-radius: 20px;
+    background: #ff69b4;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #ff1493;
+    transform: scale(1.1);
+}
+
+.letterText {
+    font-size: 18px;
+    line-height: 1.6;
+    min-height: 150px;
+    white-space: pre-line;
+}
+
+.confetti {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    top: 0;
+    animation: fall 3s linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+input {
+    padding: 8px;
+    margin: 5px;
+    border-radius: 8px;
+    border: 1px solid pink;
+}
+</style>
+</head>
+
+<body>
+
+<!-- COUNTDOWN SCREEN -->
+<div id="countdownScreen">
+    ⏳ Countdown To Our Special Moment 💖
+    <div id="timer"></div>
+</div>
+
+<audio id="song" src="birthday.mp3" loop></audio>
+
+<h1>🎂 Happy Birthday My Princess 💖</h1>
+
+<div id="mainButtons">
+<button onclick="startMusic()">🎵 Play Song</button>
+<button onclick="showLetter()">💌 Open Letter</button>
+<button onclick="showProposal()">💍 Proposal</button>
+<button onclick="showSurprise()">🎁 Surprise</button>
+<button onclick="showPhotos()">📸 Our Photos</button>
+</div>
+
+<!-- LETTER -->
+<div id="letter" class="box">
+<h2>💌 My Hidden Letter</h2>
+<div class="letterText" id="typingText"></div>
+<br>
+<button onclick="goBack('letter')">🔙 Back</button>
+</div>
+
+<!-- PROPOSAL -->
+<div id="proposal" class="box">
+<h2>💍 A Question For You</h2>
+<p>Will you stay with me forever? ❤️</p>
+
+<button onclick="sayYes()">YES 💕</button>
+
+<button id="noBtn" onmouseover="moveNoButton()" 
+style="position:absolute;">NO 😜</button>
+
+<br><br>
+<button onclick="goBack('proposal')">🔙 Back</button>
+</div>
+
+<!-- SURPRISE QUIZ -->
+<div id="surprise" class="box">
+<h2>🎁 Love Memory Quiz 💖</h2>
+
+<p>1️⃣ When we need first time?? 💕</p>
+<input type="text" id="q1">
+
+<p>2️⃣ Which 2 place we go on first meet?? (DD/MM)</p>
+<input type="text" id="q2">
+
+<p>3️⃣ When you say yes to my proposal? (DD/MM)</p>
+<input type="text" id="q3">
+
+<p>4️⃣ First Kiss? (DD/MM)</p>
+<input type="text" id="q4">  
+
+<br><br>
+<button onclick="checkQuiz()">Submit Answers 💕</button>
+
+<br><br>
+<p id="quizResult"></p>
+
+<button onclick="goBack('surprise')">🔙 Back</button>
+</div>
+<!-- PHOTO GALLERY -->
+<div id="photos" class="box">
+<h2>📸 Our Beautiful Memories 💕</h2>
+
+<div class="slideshow">
+    <img src="photo1.jpg" class="slide active">
+    <img src="photo2.jpg" class="slide">
+    <img src="photo3.jpg" class="slide">
+    <img src="photo4.jpg" class="slide">
+</div>
+
+<br><br>
+<button onclick="goBack('photos')">🔙 Back</button>
+</div>
+
+<script>
+
+function showPhotos(){
+    hideMain();
+    document.getElementById("photos").style.display = "block";
+}
+/* COUNTDOWN LOGIC */
+const targetDate = new Date("March 3, 2026 00:00:00").getTime();
+const countdownScreen = document.getElementById("countdownScreen");
+const timerDisplay = document.getElementById("timer");
+
+const countdownInterval = setInterval(function(){
+    const now = new Date().getTime();
+    const distance = targetDate - now;
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    timerDisplay.innerHTML =
+        days + "d " +
+        hours + "h " +
+        minutes + "m " +
+        seconds + "s ";
+
+    if(distance < 0){
+        clearInterval(countdownInterval);
+        countdownScreen.style.display = "none";
+    }
+},1000);
+
+/* Floating Hearts */
+setInterval(function() {
+    var heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+}, 400);
+
+/* Music */
+function startMusic() {
+    document.getElementById("song").play();
+}
+
+/* Navigation */
+function hideMain() {
+    document.getElementById("mainButtons").style.display = "none";
+}
+function showMain() {
+    document.getElementById("mainButtons").style.display = "block";
+}
+function showLetter() {
+    hideMain();
+    document.getElementById("letter").style.display = "block";
+    typeWriter();
+}
+function showProposal() {
+    hideMain();
+    document.getElementById("proposal").style.display = "block";
+}
+function showSurprise() {
+    hideMain();
+    document.getElementById("surprise").style.display = "block";
+}
+function goBack(id) {
+    document.getElementById(id).style.display = "none";
+    showMain();
+}
+
+/* Typing Effect */
+var message = `My Princess 💖
+
+On this beautiful day, I just want to say…
+You are the most precious think or gift of my life.
+With you every day feels like a beautiful dream
+Your smile is my favourite view
+Your voice is my favourite sound
+And your love is my greatest blessing.
+
+I love you forever 💕`;
+
+var i = 0;
+
+function typeWriter() {
+    var textBox = document.getElementById("typingText");
+    textBox.innerHTML = "";
+    i = 0;
+    function typing() {
+        if (i < message.length) {
+            textBox.innerHTML += message.charAt(i);
+            i++;
+            setTimeout(typing, 40);
+        }
+    }
+    typing();
+}
+
+/* Escaping NO */
+function moveNoButton() {
+    var button = document.getElementById("noBtn");
+    var x = Math.random() * (window.innerWidth - 100);
+    var y = Math.random() * (window.innerHeight - 100);
+    button.style.left = x + "px";
+    button.style.top = y + "px";
+}
+
+/* YES Confetti */
+function sayYes() {
+    alert("YAYYYY 💖 I Knowww I LOVE YOUUUU 😍");
+    createConfetti();
+}
+
+/* Love Quiz */
+function checkQuiz(){
+
+    var a1 = document.getElementById("q1").value.trim();
+    var a2 = document.getElementById("q2").value.trim().toLowerCase();
+    var a3 = document.getElementById("q3").value.trim();
+    var a4 = document.getElementById("q4").value.trim();
+
+    if(
+        a1 === "2904" &&
+        a2.includes("chai garam cafe") &&
+        a2.includes("gurudwara") &&
+        a3 === "0805" &&
+        a4 === "0411"
+    ){
+        document.getElementById("quizResult").innerHTML =
+        "Correct 😍💖 You know our love perfectly 👑💕";
+
+        createConfetti();
+    } else {
+        alert("No babby something is wrong 🥺💔");
+    }
+}
+
+/* Confetti */
+function createConfetti(){
+    for(let i=0;i<100;i++){
+        var conf = document.createElement("div");
+        conf.className="confetti";
+        conf.style.left=Math.random()*100+"vw";
+        conf.style.background="hsl("+Math.random()*360+",100%,50%)";
+        document.body.appendChild(conf);
+        setTimeout(()=>conf.remove(),3000);
+    }
+}
+/* AUTO SLIDESHOW */
+let currentSlide = 0;
+const slides = document.querySelectorAll(".slide");
+
+setInterval(function(){
+    if(slides.length > 0){
+        slides[currentSlide].classList.remove("active");
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.add("active");
+    }
+}, 3000); // changes every 3 seconds
+
+</script>
+</body>
+</html>

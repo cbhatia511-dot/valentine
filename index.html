@@ -148,6 +148,29 @@ input {
     border-radius: 8px;
     border: 1px solid pink;
 }
+    /* UNLOCK ANIMATION */
+#unlockAnimation{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,192,203,0.95);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 99999;
+    font-size: 40px;
+    color: #ff1493;
+    text-align: center;
+    animation: fadeUnlock 1s ease;
+}
+
+@keyframes fadeUnlock{
+    from{opacity:0;}
+    to{opacity:1;}
+}
 </style>
 </head>
 
@@ -255,6 +278,12 @@ style="position:absolute;">NO 😜</button>
 
 <br><br>
 <button onclick="goBack('photos')">🔙 Back</button>
+</div>
+    <!-- UNLOCK ANIMATION -->
+<div id="unlockAnimation">
+💖 Unlocking Our Memories 💖
+<br><br>
+🔓
 </div>
 
 <script>
@@ -416,9 +445,18 @@ function unlockPhotos(){
 
     var password = document.getElementById("photoPassword").value;
 
-    if(password === "0818"){   // change this code if you want
+    if(password === "110306"){
+
         document.getElementById("photoLock").style.display = "none";
-        document.getElementById("photos").style.display = "block";
+
+        const unlock = document.getElementById("unlockAnimation");
+        unlock.style.display = "flex";
+
+        setTimeout(function(){
+            unlock.style.display = "none";
+            document.getElementById("photos").style.display = "block";
+        },2000);
+
     }
     else{
         alert("Wrong code baby 😜 try again");
@@ -440,6 +478,7 @@ setInterval(function(){
 </script>
 </body>
 </html>
+
 
 
 

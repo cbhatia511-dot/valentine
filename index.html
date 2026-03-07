@@ -191,7 +191,9 @@ input {
 <button onclick="showLetter()">💌 Open Letter</button>
 <button onclick="showProposal()">💍 Proposal</button>
 <button onclick="showSurprise()">🎁 Surprise</button>
-<button onclick="showPhotoLock()">📸 Our Photos</button></div>
+<button onclick="showPhotoLock()">📸 Our Photos</button>
+<button onclick="showWishes()">💖 Birthday Wishes</button>
+</div>
 
 <!-- LETTER -->
 <div id="letter" class="box">
@@ -278,6 +280,25 @@ style="position:absolute;">NO 😜</button>
 💖 Unlocking Our Memories 💖
 <br><br>
 🔓
+</div>
+    <!-- BIRTHDAY WISHES -->
+<div id="wishes" class="box">
+<h2>💖 Birthday Wishes For My Princess 💖</h2>
+
+<p>🌸 Happy Birthday to the most beautiful girl in my life.</p>
+<p>💫 You make every moment of my life magical.</p>
+<p>💕 I feel lucky to have you in my life.</p>
+
+<br>
+
+<!-- VIDEO MESSAGE -->
+<video width="280" controls style="border-radius:15px; box-shadow:0 0 20px hotpink;">
+    <source src="birthday-video.mp4" type="video/mp4">
+</video>
+
+<br><br>
+
+<button onclick="goBack('wishes')">🔙 Back</button>
 </div>
 
 <script>
@@ -467,11 +488,16 @@ setInterval(function(){
         slides[currentSlide].classList.add("active");
     }
 }, 3000); // changes every 3 seconds
+ function showWishes(){
+    hideMain();
+    document.getElementById("wishes").style.display = "block";
+}   
     
 
 </script>
 </body>
 </html>
+
 
 
 

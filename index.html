@@ -380,10 +380,11 @@ const countdownInterval = setInterval(function(){
     const popup = document.getElementById("birthdayPopup");
     popup.style.display = "flex";
 
+    launchFireworks();
+
     setTimeout(function(){
-        popup.style.display = "flex";
-        launchFireworks();
-    },4000); // popup visible for 4 seconds
+        popup.style.display = "none";
+    },4000);// popup visible for 4 seconds
 }
 },1000);
 
@@ -570,6 +571,7 @@ setInterval(function(){
 </script>
 </body>
 </html>
+
 
 
 

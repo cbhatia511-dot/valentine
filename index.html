@@ -212,6 +212,31 @@ input {
         opacity:0;
     }
 }
+    #photoViewer{
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: rgba(0,0,0,0.9);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:100000;
+}
+
+#photoViewer img{
+    max-width:90%;
+    max-height:90%;
+    border-radius:20px;
+    box-shadow:0 0 30px hotpink;
+    animation: zoomIn 0.4s ease;
+}
+
+@keyframes zoomIn{
+    from{transform:scale(0.8);opacity:0;}
+    to{transform:scale(1);opacity:1;}
+}
 </style>
 </head>
 
@@ -304,16 +329,16 @@ style="position:absolute;">NO 😜</button>
 <h2>📸 Our Beautiful Memories 💕</h2>
 
 <div class="slideshow">
-    <img src="photo1.jpg" class="slide active">
-    <img src="photo2.jpg" class="slide">
-    <img src="photo3.jpg" class="slide">
-    <img src="photo4.jpg" class="slide">
-    <img src="photo5.jpg" class="slide">
-    <img src="photo6.jpg" class="slide">
-    <img src="photo7.jpg" class="slide">
-    <img src="photo8.jpg" class="slide">
-    <img src="photo9.jpg" class="slide">
-    <img src="photo10.jpg" class="slide">
+    <img src="photo1.jpg" class="slide active"onclick="openViewer(this)">
+    <img src="photo2.jpg" class="slide"onclick="openViewer(this)">
+    <img src="photo3.jpg" class="slide"onclick="openViewer(this)">
+    <img src="photo4.jpg" class="slide"onclick="openViewer(this)">
+    <img src="photo5.jpg" class="slide"onclick="openViewer(this)">
+    <img src="photo6.jpg" class="slide"onclick="openViewer(this)">
+    <img src="photo7.jpg" class="slide"onclick="openViewer(this)">
+    <img src="photo8.jpg" class="slide"onclick="openViewer(this)">
+    <img src="photo9.jpg" class="slide"onclick="openViewer(this)">
+    <img src="photo10.jpg" class="slide"onclick="openViewer(this)">
 
 </div>
 
@@ -345,6 +370,10 @@ style="position:absolute;">NO 😜</button>
 <br><br>
 
 <button onclick="goBack('wishes')">🔙 Back</button>
+</div>
+    <!-- FULLSCREEN PHOTO VIEWER -->
+<div id="photoViewer" onclick="closeViewer()">
+    <img id="viewerImg">
 </div>
 
 <script>
@@ -545,11 +574,23 @@ setInterval(function(){
     hideMain();
     document.getElementById("wishes").style.display = "block";
 }   
+    function openViewer(img){
+    const viewer = document.getElementById("photoViewer");
+    const viewerImg = document.getElementById("viewerImg");
+
+    viewer.style.display = "flex";
+    viewerImg.src = img.src;
+}
+
+function closeViewer(){
+    document.getElementById("photoViewer").style.display = "none";
+}
     
 
 </script>
 </body>
 </html>
+
 
 
 
